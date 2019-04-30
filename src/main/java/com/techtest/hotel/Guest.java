@@ -2,7 +2,7 @@ package com.techtest.hotel;
 
 import java.util.Objects;
 
-public class Guest {
+public final class Guest {
     private final String firstName;
     private final String lastName;
 

@@ -1,5 +1,6 @@
 package com.techtest.hotel;
 
+import java.util.Collection;
 import java.util.Optional;
 
 public interface RoomStore {
@@ -8,4 +9,6 @@ public interface RoomStore {
     void store(Room room);
 
     void remove(int roomNumber);
+
+    Collection<Room> rooms();
 }
