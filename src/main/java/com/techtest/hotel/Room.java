@@ -1,7 +1,13 @@
 package com.techtest.hotel;
 
 public class Room {
+    public enum Availability {
+        AVAILABLE,
+        UNAVAILABLE
+    }
+
     private final int roomNumber;
+
     private Availability availability;
 
     public Room(final int roomNumber) {
@@ -20,8 +26,7 @@ public class Room {
         return roomNumber;
     }
 
-    public enum Availability {
-        AVAILABLE
+    public void makeUnavailable() {
+        availability = Availability.UNAVAILABLE;
     }
-
 }

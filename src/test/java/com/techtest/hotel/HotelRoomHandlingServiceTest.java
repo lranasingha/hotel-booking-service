@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Optional;
 
 import static com.techtest.hotel.Room.Availability.AVAILABLE;
+import static com.techtest.hotel.Room.Availability.UNAVAILABLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
@@ -64,4 +65,18 @@ class HotelRoomHandlingServiceTest {
 
         assertEquals(roomStore.get(roomNumber).get().availability(), AVAILABLE);
     }
+
+    @Test
+    public void can_book_a_room() {
+        var roomNumber = 1;
+        Room room = new Room(roomNumber);
+        when(roomStore.get(eq(room.number()))).thenReturn(Optional.of(room));
+        hotelRoomAvailabilityService.addRoom(room);
+
+        hotelRoomAvailabilityService.bookRoom(roomNumber);
+
+        assertEquals(roomStore.get(roomNumber).get().availability(), UNAVAILABLE);
+    }
+
+
 }
