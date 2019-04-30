@@ -67,7 +67,7 @@ class HotelRoomHandlingServiceTest {
     }
 
     @Test
-    public void can_book_a_room() {
+    void can_book_a_room() {
         var roomNumber = 1;
         Room room = new Room(roomNumber);
         when(roomStore.get(eq(room.number()))).thenReturn(Optional.of(room));
