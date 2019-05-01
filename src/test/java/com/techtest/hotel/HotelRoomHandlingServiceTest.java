@@ -69,15 +69,24 @@ class HotelRoomHandlingServiceTest {
     }
 
     @Test
-    void can_book_a_room() {
+    void can_make_given_room_unavailable() {
         var roomNumber = 1;
         var room = new Room(roomNumber);
         when(roomStore.get(eq(room.number()))).thenReturn(Optional.of(room));
         roomHandlingService.addRoom(room);
 
-        roomHandlingService.bookRoom(roomNumber);
+        Optional<Room> updatedRoom = roomHandlingService.makeUnavailable(roomNumber);
 
-        assertEquals(roomStore.get(roomNumber).get().availability(), UNAVAILABLE);
+        assertEquals(updatedRoom.get().availability(), UNAVAILABLE);
+    }
+
+    @Test
+    void return_empty_if_no_room_found_for_the_room_number() {
+        var roomNumber = 10;
+
+        Optional<Room> updatedRoom = roomHandlingService.makeUnavailable(roomNumber);
+
+        assertEquals(updatedRoom, Optional.empty());
     }
 
     @Test

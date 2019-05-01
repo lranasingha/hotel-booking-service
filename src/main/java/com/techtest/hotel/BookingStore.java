@@ -5,4 +5,6 @@ import java.util.function.Predicate;
 
 public interface BookingStore {
     Collection<Booking> findBookingsBy(final Predicate<Booking> and);
+
+    void store(Booking booking);
 }

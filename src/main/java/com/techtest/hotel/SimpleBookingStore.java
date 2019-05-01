@@ -18,6 +18,7 @@ public final class SimpleBookingStore implements BookingStore {
                 .collect(toUnmodifiableList());
     }
 
+    @Override
     public void store(final Booking booking) {
         bookings.add(booking);
     }

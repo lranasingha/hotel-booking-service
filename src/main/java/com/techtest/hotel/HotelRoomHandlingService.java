@@ -24,9 +24,10 @@ public class HotelRoomHandlingService implements RoomHandlingService {
     }
 
     @Override
-    public void bookRoom(final int roomNumber) {
+    public Optional<Room> makeUnavailable(final int roomNumber) {
         Optional<Room> room = roomStore.get(roomNumber);
         room.ifPresent(Room::makeUnavailable);
+        return room;
     }
 
     @Override
