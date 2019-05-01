@@ -1,4 +1,4 @@
-package com.techtest.hotel;
+package com.techtest.hotelbooking.room;
 
 import java.util.Collection;
 import java.util.Optional;

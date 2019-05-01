@@ -1,4 +1,4 @@
-package com.techtest.hotel;
+package com.techtest.hotelbooking;
 
 import java.util.Collection;
 import java.util.HashSet;

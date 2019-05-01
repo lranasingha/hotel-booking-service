@@ -1,10 +1,12 @@
-package com.techtest.hotel;
+package com.techtest.hotelbooking.room;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 final class SimpleRoomStoreTest {
 
@@ -31,5 +33,14 @@ final class SimpleRoomStoreTest {
         roomStore.remove(10);
 
         assertEquals(Optional.empty(), roomStore.get(10));
+    }
+
+    @Test
+    void can_get_all_rooms() {
+        roomStore.store(new Room(10));
+        roomStore.store(new Room(20));
+
+        assertTrue(roomStore.rooms().containsAll(List.of(new Room(10), new Room(20))),
+                "room store doesn't contain all rooms!");
     }
 }

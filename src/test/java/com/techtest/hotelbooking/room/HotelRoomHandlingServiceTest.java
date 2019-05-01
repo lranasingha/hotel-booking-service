@@ -1,4 +1,4 @@
-package com.techtest.hotel;
+package com.techtest.hotelbooking.room;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -7,13 +7,13 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-import static com.techtest.hotel.Room.Availability.AVAILABLE;
-import static com.techtest.hotel.Room.Availability.UNAVAILABLE;
+import static com.techtest.hotelbooking.room.Room.Availability.AVAILABLE;
+import static com.techtest.hotelbooking.room.Room.Availability.UNAVAILABLE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-class HotelRoomHandlingServiceTest {
+final class HotelRoomHandlingServiceTest {
 
     private RoomStore roomStore;
     private HotelRoomHandlingService roomHandlingService;

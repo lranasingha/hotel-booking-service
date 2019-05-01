@@ -1,11 +1,11 @@
-package com.techtest.hotel;
+package com.techtest.hotelbooking.room;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-public class SimpleRoomStore implements RoomStore {
+public final class SimpleRoomStore implements RoomStore {
     private final Map<Number, Room> roomsMap = new HashMap<>();
 
     @Override
