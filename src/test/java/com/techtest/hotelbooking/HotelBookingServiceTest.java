@@ -1,8 +1,7 @@
 package com.techtest.hotelbooking;
 
-import com.techtest.hotelbooking.room.HotelRoomHandlingService;
+import com.techtest.hotelbooking.room.HotelRoomHandlerService;
 import com.techtest.hotelbooking.room.Room;
-import com.techtest.hotelbooking.room.RoomHandlingService;
 import com.techtest.hotelbooking.room.SimpleRoomStore;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,26 +14,26 @@ import static com.techtest.hotelbooking.Booking.Status.FAILED;
 import static com.techtest.hotelbooking.Booking.acceptedBooking;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-final class BookingServiceTest {
+final class HotelBookingServiceTest {
 
     private BookingStore bookingStore;
-    private RoomHandlingService roomHandlingService;
-    private BookingService bookingService;
+    private HotelRoomHandlerService roomHandlerService;
+    private HotelBookingService hotelBookingService;
 
     @BeforeEach
     void setUp() {
         bookingStore = new SimpleBookingStore();
-        roomHandlingService = new HotelRoomHandlingService(new SimpleRoomStore());
-        bookingService = new BookingService(bookingStore, roomHandlingService);
+        roomHandlerService = new HotelRoomHandlerService(new SimpleRoomStore());
+        hotelBookingService = new HotelBookingService(bookingStore, roomHandlerService);
     }
 
     @Test
     void can_make_a_booking() {
         var date = LocalDate.now();
         var bookingRequest = new BookingRequest(new Guest("firstName", "lastName"), date, 1);
-        roomHandlingService.addRoom(new Room(1));
+        roomHandlerService.addRoom(new Room(1));
 
-        bookingService.makeBooking(bookingRequest);
+        hotelBookingService.makeBooking(bookingRequest);
 
         var booking = bookingStore.findBookingsBy(b -> b.roomNumber() == 1).iterator().next();
 
@@ -49,14 +48,14 @@ final class BookingServiceTest {
     void the_booking_is_stored_in_the_booking_store() {
         var date = LocalDate.now();
         var bookingRequest = new BookingRequest(new Guest("firstName", "lastName"), date, 1);
-        roomHandlingService.addRoom(new Room(1));
+        roomHandlerService.addRoom(new Room(1));
 
-        bookingService.makeBooking(bookingRequest);
+        hotelBookingService.makeBooking(bookingRequest);
         var booking = bookingStore.findBookingsBy(b -> b.roomNumber() == 1).iterator().next();
         assertEquals(ACCEPTED, booking.status());
 
-        roomHandlingService.removeRoom(1);
-        bookingService.makeBooking(bookingRequest);
+        roomHandlerService.removeRoom(1);
+        hotelBookingService.makeBooking(bookingRequest);
 
         booking = bookingStore.findBookingsBy(b -> b.status() != ACCEPTED).iterator().next();
         assertEquals(FAILED, booking.status());
@@ -69,7 +68,7 @@ final class BookingServiceTest {
 
         var bookingRequest = new BookingRequest(new Guest("firstName", "lastName"), today, 1);
 
-        var booking = bookingService.makeBooking(bookingRequest);
+        var booking = hotelBookingService.makeBooking(bookingRequest);
 
         assertEquals(FAILED, booking.status());
     }
@@ -77,13 +76,13 @@ final class BookingServiceTest {
     @Test
     void can_find_available_rooms_by_date() {
         var today = LocalDate.now();
-        roomHandlingService.addRoom(new Room(1));
-        roomHandlingService.addRoom(new Room(3));
+        roomHandlerService.addRoom(new Room(1));
+        roomHandlerService.addRoom(new Room(3));
         var bookingRequest = new BookingRequest(new Guest("firstName", "lastName"), today, 1);
 
-        bookingService.makeBooking(bookingRequest);
+        hotelBookingService.makeBooking(bookingRequest);
 
-        Collection<Room> rooms = bookingService.findAvailableRoomsByDate(today);
+        Collection<Room> rooms = hotelBookingService.findAvailableRoomsByDate(today);
 
         assertEquals(1, rooms.size());
         assertEquals(new Room(3), rooms.iterator().next());
@@ -93,14 +92,14 @@ final class BookingServiceTest {
     void can_find_bookings_by_the_given_guest() {
         var today = LocalDate.now();
         Guest guest = new Guest("firstName", "lastName");
-        roomHandlingService.addRoom(new Room(1));
-        roomHandlingService.addRoom(new Room(3));
-        roomHandlingService.addRoom(new Room(5));
+        roomHandlerService.addRoom(new Room(1));
+        roomHandlerService.addRoom(new Room(3));
+        roomHandlerService.addRoom(new Room(5));
 
         BookingRequest bookingRequest = new BookingRequest(guest, today, 5);
-        bookingService.makeBooking(bookingRequest);
+        hotelBookingService.makeBooking(bookingRequest);
 
-        Collection<Booking> rooms = bookingService.findAvailableRoomsByGuest(guest);
+        Collection<Booking> rooms = hotelBookingService.findAvailableRoomsByGuest(guest);
 
         assertEquals(1, rooms.size());
         assertEquals(acceptedBooking(bookingRequest), rooms.iterator().next());

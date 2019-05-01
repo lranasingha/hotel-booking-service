@@ -6,10 +6,10 @@ import java.util.function.Predicate;
 
 import static java.util.stream.Collectors.toUnmodifiableList;
 
-public class HotelRoomHandlingService implements RoomHandlingService {
+public final class HotelRoomHandlerService implements RoomHandlerService {
     private final RoomStore roomStore;
 
-    public HotelRoomHandlingService(final RoomStore roomStore) {
+    public HotelRoomHandlerService(final RoomStore roomStore) {
         this.roomStore = roomStore;
     }
 
@@ -30,7 +30,6 @@ public class HotelRoomHandlingService implements RoomHandlingService {
         return room;
     }
 
-    @Override
     public Collection<Room> findRoomsBy(final Predicate<Room> condition) {
         return roomStore
                 .rooms()

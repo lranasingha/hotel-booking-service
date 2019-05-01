@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 public final class BookingRequest {
     private final Guest guest;
-    private final LocalDate fromDate;
+    private final LocalDate date;
     private final int roomNumber;
 
     public BookingRequest(final Guest guest,
-                          final LocalDate fromDate,
+                          final LocalDate date,
                           final int roomNumber) {
 
         this.guest = guest;
-        this.fromDate = fromDate;
+        this.date = date;
         this.roomNumber = roomNumber;
     }
 
@@ -21,7 +21,7 @@ public final class BookingRequest {
     }
 
     public LocalDate date() {
-        return fromDate;
+        return date;
     }
 
     public int roomNumber() {

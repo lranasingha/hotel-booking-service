@@ -2,7 +2,7 @@ package com.techtest.hotelbooking.room;
 
 import java.util.Objects;
 
-public class Room {
+public final class Room {
     public enum Availability {
         AVAILABLE,
         UNAVAILABLE

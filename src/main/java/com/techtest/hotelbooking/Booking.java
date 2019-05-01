@@ -7,7 +7,7 @@ import static com.techtest.hotelbooking.Booking.Status.ACCEPTED;
 import static com.techtest.hotelbooking.Booking.Status.FAILED;
 import static java.lang.String.format;
 
-public class Booking {
+public final class Booking {
 
     public enum Status {
         ACCEPTED,

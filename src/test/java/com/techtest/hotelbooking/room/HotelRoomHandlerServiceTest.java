@@ -13,15 +13,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.*;
 
-final class HotelRoomHandlingServiceTest {
+final class HotelRoomHandlerServiceTest {
 
     private RoomStore roomStore;
-    private HotelRoomHandlingService roomHandlingService;
+    private HotelRoomHandlerService roomHandlingService;
 
     @BeforeEach
     void setUp() {
         roomStore = mock(RoomStore.class);
-        roomHandlingService = new HotelRoomHandlingService(roomStore);
+        roomHandlingService = new HotelRoomHandlerService(roomStore);
     }
 
     @Test
