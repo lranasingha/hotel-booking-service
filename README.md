@@ -21,3 +21,6 @@ The public Java API has been provided in `HotelManagerService`. This is thread-s
 * The functionality is implemented in `HotelBookingService` & `HotelRoomHandlerService` classes. The `HotelManagerService` is the delegated thread-safe version of those classes. This helps separating multi-threaded and single-threaded code cleanly which is one of the best ways to implement multi-threaded code.
 * The code has been written following TDD practices.
 * The thread synchronisation has been achieved using a simple monitor embedded in the `HotelManagerService`. There are other options such as Reentrant Locks. However, they are too broad for this particular task. Simplicity matters.
+
+#### Further Improvements
+This is a minimal viable version of the application. Therefore, the sad paths of the system haven't been fully covered. More tests need to be done. 
